@@ -1,24 +1,11 @@
 import express from "express";
+import morgan from "morgan";
 
 
 const PORT = 3001;
 const app = express();
+const logger = morgan("dev");
 
-
-const logger = (req, res, next) => {
-    console.log(`${req.method} ${req.url}`);
-    next();
-}
-const privateMiddleware = (req, res, next) => {
-    const url = req.url;
-    //console.log(req.url);
-    if (url === "/protected") {
-        console.log("Not allowed");
-        return res.send("<h1>Not Allowed</h1>");
-    }
-    console.log("Allowed.");
-    next();
-}
 
 const handleHome = (req, res) => {
     return res.send("Hello :)");
@@ -31,8 +18,7 @@ const handleProtected = (req, res) => {
 };
 
 
-app.use(logger, privateMiddleware);
-
+app.use(logger);
 app.get("/", handleHome);
 app.get("/login", handleLogin);
 app.get("/protected", handleProtected);
