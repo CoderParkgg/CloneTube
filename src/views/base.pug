@@ -4,5 +4,17 @@ html(lang="kr")
         title #{pageTitle} | CloneTube
         link(rel="stylesheet" href="https://unpkg.com/mvp.css")
     body
-        block content
+        header 
+            if fakeUser.loggedIn    
+                small Hello #{fakeUser.name}
+            nav
+                ul 
+                    li 
+                        if(fakeUser.loggedIn)
+                            a(href="/login") LogOut
+                        else 
+                            a(href="/login") Login
+            h1=pageTitle
+        main
+            block content
     include partials/footer.pug

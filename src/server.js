@@ -14,7 +14,7 @@ app.set("views", process.cwd() + "/src/views");
 app.use(logger);
 app.use("/", globalRouter);
 app.use("/user", userRouter);
-app.use("/video", videoRouter);
+app.use("/videos", videoRouter);
 
 const handleListening = () => console.log(`server listening on port http://localhost:${PORT}`)
 app.listen(PORT, handleListening); //request를 듣늗다. callback함수를 사용하여 일정 port에 요청이 오면 callback함수 실행
