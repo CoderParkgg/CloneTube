@@ -5,15 +5,10 @@ html(lang="kr")
         link(rel="stylesheet" href="https://unpkg.com/mvp.css")
     body
         header 
-            if fakeUser.loggedIn    
-                small Hello #{fakeUser.name}
             nav
                 ul 
                     li 
-                        if(fakeUser.loggedIn)
-                            a(href="/login") LogOut
-                        else 
-                            a(href="/login") Login
+                        a(href="upload") Upload Video
             h1=pageTitle
         main
             block content
