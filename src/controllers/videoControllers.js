@@ -30,7 +30,7 @@ export const getUpload = (req, res) => {
 };
 export const postUpload = (req, res) => {
     const {title, description, hashtag} = req.body;
-    const video = new Video({
+    const video = new Video({ //model에는 타입만 지정했지만, 여기서는 직접 값을 넣어준다. 
         title, //title : title 과 같음. 여기서 후자는 위의 title의 값을 뜻함.
         description,
         createdAt : Date.now(),
