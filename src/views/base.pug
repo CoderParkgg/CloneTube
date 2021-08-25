@@ -1,20 +1,28 @@
 doctype html
 html(lang="kr")
     head 
-        title #{pageTitle} | CloneTube
+        title #{pageTitle} | #{siteName}
         link(rel="stylesheet" href="https://unpkg.com/mvp.css")
     body
         header 
             nav
                 ul 
                     li 
-                        a(href="/videos/upload") Upload Video
-                    li 
                         a(href="/") Home
                     li 
-                        a(href="/search") Search
+                        a(href="/videos/upload") Upload Video
                     li 
-                        a(href="/join") Join
+                        a(href="/search") Search
+                    if loggedIn
+                        li 
+                            a(href="/porfile") #{loggedInUserName.name}
+                        li 
+                            a(href="/logout") Log out
+                    else
+                        li 
+                            a(href="/join") Join
+                        li 
+                            a(href="/login") Login 
             h1=pageTitle
         main
             block content
