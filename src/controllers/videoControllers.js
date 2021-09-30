@@ -55,7 +55,7 @@ export const watch = async (req, res) => {
     if(video === null){
         return res.render("404", {pageTitle : "Video not found."})
     }
-    return res.render("watch", {pageTitle : `watching `, video});
+    return res.render("video/watch", {pageTitle : `watching `, video});
 };
 
 

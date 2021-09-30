@@ -1,0 +1,30 @@
+extends ../base.pug
+
+block content 
+    h3=loggedInUser.name
+    form( method="POST")
+        dev 
+            h5="name"
+            input(type="text", name="name", required, placeholder="name", value=loggedInUser.name)
+            hr
+        dev
+            h5="email"
+            if errorMessageOfEmail 
+                span=errorMessageOfEmail
+            input(type="email", name="email", required, placeholder="email", value=loggedInUser.email)
+            hr
+        dev
+            h5="username"
+            if errorMessageOfUsername 
+                span=errorMessageOfUsername
+            input(type="text", name="username", required, placeholder="username", value=loggedInUser.username)
+            hr
+        dev
+            h5="rocation"
+            input(type="text", name="rocation", required, placeholder="rocation", value=loggedInUser.rocation)
+            hr
+        input(type="submit" value="Update Profile")
+
+        if !loggedInUser.socialOnly
+            hr
+            a(href="change-password") Change password &rarr;
