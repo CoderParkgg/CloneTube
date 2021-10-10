@@ -18,6 +18,8 @@ html(lang="kr")
                             a(href="/user/edit") Edit Profile
                         li 
                             a(href="/user/logout") Log out
+                        li 
+                            a(href=`/user/${loggedInUser._id}`) My Profile
                     else
                         li 
                             a(href="/join") Join

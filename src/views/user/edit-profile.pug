@@ -2,7 +2,12 @@ extends ../base.pug
 
 block content 
     h3=loggedInUser.name
-    form( method="POST")
+    img(src=loggedInUser.avatarUrl, width="100", height="100")
+    form( method="POST", enctype="multipart/form-data")
+        dev 
+            label(for="avatar") Avatar
+            input(type="file", id="avatar", name="avatar", accept=".png, .jpg, .jepg")
+            hr
         dev 
             h5="name"
             input(type="text", name="name", required, placeholder="name", value=loggedInUser.name)
@@ -20,8 +25,8 @@ block content
             input(type="text", name="username", required, placeholder="username", value=loggedInUser.username)
             hr
         dev
-            h5="rocation"
-            input(type="text", name="rocation", required, placeholder="rocation", value=loggedInUser.rocation)
+            h5="location"
+            input(type="text", name="location", required, placeholder="location", value=loggedInUser.location)
             hr
         input(type="submit" value="Update Profile")
 

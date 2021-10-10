@@ -1,6 +1,8 @@
 import User from "../models/User";
+import Video from "../models/Video";
 import bcrypt from "bcrypt";
 import fetch from 'node-fetch';
+import { render } from "pug";
 
 //home
 export const getJoin = (req, res) => res.render("join", {pageTitle :"Join" });
@@ -27,6 +29,7 @@ export const postJoin = async(req, res) => {
         return res.render("join", {pageTitle : "Join", errorMessage : error._message});
     }
 };
+
 export const getLogin = (req, res) => {
     return res.render("login", {pageTitle : "Login"});
 };
@@ -139,24 +142,29 @@ export const getEdit = (req, res) => {
 export const postEdit = async (req, res) => {
     const { 
         session : {
-            user : { _id }
+            user : { _id , avatarUrl}
         },
-        body : { name, email, username, location }
+        body : { name, email, username, location },
+        file 
     } = req;
     const email_id = await User.findOne({email});
     const username_id = await User.findOne({username});
     if(email_id._id != _id){
         return res.render('user/edit-profile', {pageTitle : "edit-profile", errorMessageOfEmail : "email is already existed"});
     }
-    if(username_id._id == _id){
+    if(username_id._id != _id){
         return res.render('user/edit-profile', {pageTitle : "edit-profile", errorMessageOfUsername : "username is already existed"});
     }
-
     const updatedUser = await User.findByIdAndUpdate( _id, {
-        name, email, username, location
+        avatarUrl : file ? `/${file.path}` : avatarUrl ,
+        name,
+        email, 
+        username, 
+        location
     },
-    {new : true})              
+    {new : true})
     req.session.user = updatedUser;
+    console.log(file, avatarUrl);
     return res.redirect('edit');
 }
 
@@ -166,19 +174,44 @@ export const logout = (req, res) => {
 };
 
 export const getChangePassword = (req, res) => {
-    if(req.session.user.socialOnly){
+    if(req.session.user.socialOnly){ 
         return res.redirect("/");
     }
     return res.render("user/change-password", {pageTitle : "change-password"})
 }
-export const postChangePassword = (req, res) => {
-    const {oldPassword, newPassword, newPasswordConfirmation,} = req.body;
-    
-
-    //aa)send notification : you chadged password!! for add, you have to login again..
-
-    return res.redirect("/");
+export const postChangePassword = async (req, res) => {
+    const {
+        session: {
+          user: { _id },
+        },
+        body: { oldPassword, newPassword, newPasswordConfirmation },
+      } = req;
+      const user = await User.findById(_id);
+      const ok = await bcrypt.compare(oldPassword, user.password);
+      if (!ok) {
+        return res.status(400).render("user/change-password", {
+          pageTitle: "Change Password",
+          errorMessage: "The current password is incorrect",
+        });
+      }
+      if (newPassword !== newPasswordConfirmation) {
+        return res.status(400).render("users/change-password", {
+          pageTitle: "Change Password",
+          errorMessage: "The password does not match the confirmation",
+        });
+      }
+      user.password = newPassword;
+      await user.save();
+      return res.redirect("/user/logout");
 }
 
 export const remove = (req, res) => res.send("Remove User");
-export const see = (req, res) => res.send("See User");
+
+export const see = async (req, res) => { //채널 페이지
+    const {id} = req.params;
+    const user = await User.findById(id).populate("videos");
+    if(!user){
+        return res.status(404).render("404", {pageTitle : "User Not Found."});
+    }
+    return res.render("user/profile", {pageTitle : `${user.name}`, user });
+};
