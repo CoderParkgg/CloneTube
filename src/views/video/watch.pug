@@ -1,14 +1,16 @@
 extends ../base.pug
 
 block content 
-    video(src='/' + video.fileUrl, controls)
-    div
-        p=video.description
-        small=video.createdAt 
-    div 
-        small Uploaded by 
+    div(class="watchDiv")
+        video(src='/' + video.fileUrl, controls, class="watchVideo")
+        div(class="watchDiv__desDiv")
+            p(class="watchDiv__title")=video.title
+            p(class="watchDiv__dis")=video.description
+        div(class="watchDiv__uploaderDev")
+            small Uploaded by  
             a(href=`/user/${video.owner._id}`) #{video.owner.name}
-    if String(video.owner._id) === String(loggedInUser._id)
-            a(href=`${video.id}/edit`) Edit Videw &rarr;
-            br
-            a(href=`${video.id}/delete`) Delete Videw &rarr;
+        if String(video.owner._id) === String(loggedInUser._id)
+            div(class="watichDiv__editDiv")
+                a(href=`${video.id}/edit`) Edit Videw &rarr;
+                a.deleteVideo Delete Videw &rarr;
+        small(class="date")=video.createdAt 

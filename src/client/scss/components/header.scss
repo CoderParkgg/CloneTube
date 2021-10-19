@@ -1,0 +1,151 @@
+@import "src/client/scss/config/_variables.scss";
+
+.header {
+    width: 100%;
+    height: 55px;
+    margin-bottom: 15px;
+    border-bottom: $text 1px solid;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    background-color: $bg;
+    box-sizing: border-box;
+    div{
+        width: fit-content;
+    }
+    .header__div1{
+        width: 700px;
+        nav {
+            width: 100%;
+            height: 100%;
+            ul {
+                display: flex;
+                align-items: center;
+                justify-self: center;
+                width: 100%;
+                height: 100%;
+                padding-left: 25px;
+                li {
+                    display:flex;
+                    align-items: center;
+                    justify-self: center;
+                    width: 160px;
+                    form{
+                        .searchbar{
+                            width : 350px;
+                            height: 23px;
+                            margin-left: 20px;
+                            padding-left: 13px;
+                            border-radius: 20px;
+                            background-color:rgba( 24%, 24%, 24%, 0.5);
+                            color: white;
+                            outline: none;
+                            border: none;
+                            justify-content: center;
+                            align-items: center;
+                            position: relative;
+                            &:focus{
+                                background-color:rgba( 24%, 24%, 24%, 1.0);
+                            }
+                        }
+                    }
+                }
+                .header__nav__home {
+                    width: 50px;
+                    height: 50px;
+                    margin-right: 130px;
+                    i {
+                    font-size: 35px;
+                    margin-right: 15px;
+                    }
+
+                }
+                .fa-search{
+                    position: absolute;
+                    left: 560px;
+                    top: 18px;
+                }
+            }
+        }
+    }
+    .header__div2{
+        nav {
+            width: 100%;
+            height: 100%;
+            ul {
+                display: flex;
+                align-items: center;
+                justify-self: center;
+                width: 100%;
+                height: 100%;
+                padding-left: 25px;
+                li {
+                    display:flex;
+                    align-items: center;
+                    justify-self: center;
+                    width: 160px;
+                }
+                .header__nav__user{
+                    width: 40px;
+                    height: 40px;
+                    margin-right: 20px;
+                    img{
+                        width: 100%;
+                        height: 100%;
+                        border: 1px solid wheat;
+                        z-index: 0;
+
+                    border-radius: 50%;
+                    }
+                    i {
+                    font-size: 35px;
+
+                    border-radius: 50%;
+                    }
+                }
+            }
+        }
+
+    }
+    .header__iconDev__hide{
+        display: none;
+    }
+    .header__iconDev__show{
+        //background-color: rgba( 24%, 24%, 24%, 0.5);
+        position: absolute;
+        width: 200px;
+        height: 400px;
+        right: 20px;
+        top: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        nav{
+            //background-color:black;
+            width: 90%;
+            height: 90%;
+            ul{
+                width: 100%;
+                height: 100%;
+
+            display: flex;
+            justify-content: center;
+            align-items: end;
+            flex-direction: column;
+
+                .header__iconDev__li{
+                    padding: 10px;
+                    margin-bottom: 30px;
+                    text-decoration-line:underline;
+                }
+                .header__iconDev__check{
+                    margin-top: 0px;
+                    margin-bottom: 30px;
+                    margin-left: 10px;
+                    padding: 10px;
+                    color: aqua;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,44 @@
+header(class ="header")
+    div(class="header__div1")
+        nav
+            ul
+                li(class="header__nav__home")
+                    a(href="/") 
+                        i.fab.fa-youtube
+                        span CloneTube
+                li 
+                    form(method="get", action='/search')
+                        input(placeholder="Serch by title", type="text", name="keyword" ,class="searchbar")
+                        i.fas.fa-search
+    div(class="header__div2")
+        nav 
+            ul
+                if loggedIn
+                    li 
+                        a(href="/videos/upload") Upload Video
+                    li 
+                        a(href="/user/logout") Log out
+                else
+                    li 
+                        a(href="/join") Join
+                    li 
+                        a(href="/login") Login 
+                li(class="header__nav__user")
+                    if loggedIn 
+                        img(src=`${loggedInUser.avatarUrl}`)
+                    else 
+                        i.fas.fa-user
+    div(class="header__iconDev__hide", id="header__iconDev")
+        nav
+            ul 
+                if !loggedIn
+                    li(class="header__iconDev__check")
+                        a(href="/login") Please Login :)
+                li 
+                    a(href="/videos/upload", class="header__iconDev__li") Upload Video
+                li 
+                    a(href="/user/edit", class="header__iconDev__li") Edit Profile
+                li 
+                    a(href="/user/logout", class="header__iconDev__li") Log out
+                li 
+                    a(href=`/user/${loggedInUser._id}`, class="header__iconDev__li") My Profile

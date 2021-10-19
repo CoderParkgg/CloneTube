@@ -1,10 +1,9 @@
 extends base
-include mixins/video
+include ./mixins/video
 
-block content 
-    h2 Welcome here you will see the trending videos
-    
-    each potato in videos 
-        +video(potato) 
-    else 
-        li Cannot found 
+block content     
+    div.homeDiv
+        each potato in videos 
+            +video(potato)
+        else 
+            li Cannot found 

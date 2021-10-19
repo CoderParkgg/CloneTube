@@ -1,15 +1,15 @@
 extends base.pug
 
 block content 
-    form(method="POST")
-        if errorMessage
-            span=errorMessage 
-        input(type="text", name="username", required, placeholder="username",)
-        input(type="password", name="password", required, placeholder="password",)
-        input(type="submit", value="Login")
-        br
-        a(href="/user/github/start") Continue with github
-    hr
-    div
-        span Don't have an account? 
-        a(href="/join")  Create one now  
+    div(class="join_div")
+        div(class="login_div")
+            form(method="POST", class="loginForm")
+                if errorMessage
+                    span=errorMessage 
+                input(type="text", name="username", required, placeholder="username",)
+                input(type="password", name="password", required, placeholder="password",)
+                input(type="submit", value="Login", class="loginBtn")
+                a(href="/user/github/start", class="loginForm__github") Continue with github
+            div(class="joinDiv")
+                span Don't you have an account? 
+                a(href="/join")  Create one now  

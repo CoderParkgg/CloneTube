@@ -1,14 +1,13 @@
 extends base.pug
 
 block content 
-    h3 Hello from upload
     if errorMessage 
         span=errorMessage
 
-    form(method="POST", enctype="multipart/form-data")
+    form(method="POST", enctype="multipart/form-data", class="uploadForm")
         label(for="video") Video File
         input(type="file", accept="video/*", required, id="video", name="video")
         input(name="title", placeholder="Title", required, type="text", minlength=1, maxlength=80) 
         input(name="description", placeholder="Description", type="text") 
         input(name="hashtags", placeholder="Hashtags, separated by comma.", required, type="text") 
-        input(type="submit", value="Upload Video")
+        input(type="submit", value="Upload Video", class="submit")

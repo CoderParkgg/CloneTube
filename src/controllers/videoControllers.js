@@ -5,7 +5,7 @@ import User from "../models/User"; //model 수입하기.
 
 export const home = async(req, res) => {
    try {
-       const videos = await Video.find({})
+       const videos = await Video.find({}).populate("owner");
        return res.render("home", { pageTitle : "Home", videos});
     }catch{
     }
@@ -21,7 +21,7 @@ export const search = async(req, res) => {
             //title : {$regex : new RegExp(`${keyword}$`, "i")} //keyword로 끝나는 것
         });
     }
-    return res.render("search", {pageTitle : "Search", videos});
+    return res.render("search", {pageTitle : "Search", videos, keyword});
 };
 
 //video routers
@@ -99,6 +99,17 @@ export const deleteVideo = async (req, res) => {
     if(String(video.owner) !== String(_id)){
         return res.status(403).redirect("/");
     }
-    await Video.findByIdAndDelete(id);
+    //await Video.findByIdAndDelete(id);
     return res.redirect("/");
 };
+
+export const registerView = async (req, res) => {
+    const {id} = req.params;
+    const video = await Video.findById(id);
+    if(!video){
+        return res.status(404);
+    }
+    video.meta.views = video.meta.view + 1;
+    await video.save();
+    res.status(200);
+}
