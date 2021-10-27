@@ -1,9 +1,0 @@
-extends ../base.pug
-
-include ../mixins/video
-
-block content 
-    each potato in user.videos 
-        +video(potato) 
-    else 
-        li Cannot found 

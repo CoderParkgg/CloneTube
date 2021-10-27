@@ -100,6 +100,15 @@ const handleMouseLeave = () => {
   controlsTimeout = setTimeout(hideControls, 3000);
 };
 
+const handleEnded = () => {
+  const {id} = videoContainer.dataset; //data-* 를 불러오려면 그 속성이 있는 태그를 돔으로 불러와 dataset 으로 불러오면 된다.
+  console.log(videoControls.dataset)
+  //fetch는 api에게 요청을 보낼 수 있음.
+  fetch( `/api/videos/${id}/view`, {
+    method: 'POST',
+  })//http나 localhost 등의 것을 붙이지 않고 /로 시작하면 현재 서버의 페이지로 전송.
+}
+
 playBtn.addEventListener("click", handlePlayClick);
 muteBtn.addEventListener("click", handleMuteClick);
 volumeRange.addEventListener("input", handleVolumeChange);
@@ -109,3 +118,4 @@ videoContainer.addEventListener("mousemove", handleMouseMove);
 videoContainer.addEventListener("mouseleave", handleMouseLeave);
 timeline.addEventListener("input", handleTimelineChange);
 fullScreenBtn.addEventListener("click", handleFullscreen);
+video.addEventListener("ended", handleEnded)

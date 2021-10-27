@@ -1,11 +1,12 @@
 import "dotenv/config";
-import "./db.js";
-import "./models/Video"
-import "./models/User"
+import "./db";
+import "./models/Video";
+import "./models/User";
 import app from "./server";
 
 const PORT = 3002;
 
+const handleListening = () =>
+  console.log(`✅ Server listenting on http://localhost:${PORT} 🚀`);
 
-const handleListening = () => console.log(`server listening on port http://localhost:${PORT}`)
 app.listen(PORT, handleListening);
