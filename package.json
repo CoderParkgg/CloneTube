@@ -9,7 +9,7 @@
   "scripts": {
     "dev:server": "nodemon",
     "dev:assets": "webpack",
-    "dev:dbset" : "mongod --config /usr/local/etc/mongod.conf --fork"
+    "dev:dbset": "mongod --config /usr/local/etc/mongod.conf --fork"
   },
   "author": "Corder Park",
   "license": "MIT",
@@ -18,10 +18,13 @@
   },
   "homepage": "https://github.com/CoderParkgg/CloneTube#readme",
   "dependencies": {
+    "@ffmpeg/core": "^0.8.5",
+    "@ffmpeg/ffmpeg": "^0.9.7",
     "bcrypt": "^5.0.1",
     "connect-mongo": "^4.5.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "express-flash": "0.0.2",
     "express-session": "^1.17.2",
     "mongoose": "^5.13.4",
     "morgan": "^1.10.0",
@@ -29,6 +32,7 @@
     "node-fetch": "^2.6.1",
     "pug": "^3.0.2",
     "regenerator-runtime": "^0.13.9"
+
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
