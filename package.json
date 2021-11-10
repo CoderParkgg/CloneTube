@@ -1,52 +1,55 @@
 {
-  "name": "clonetube",
-  "version": "1.0.0",
-  "description": "The bet way to watch videos",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/CoderParkgg/CloneTube.git"
-  },
-  "scripts": {
-    "dev:server": "nodemon",
-    "dev:assets": "webpack",
-    "dev:dbset": "mongod --config /usr/local/etc/mongod.conf --fork"
-  },
-  "author": "Corder Park",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/CoderParkgg/CloneTube/issues"
-  },
-  "homepage": "https://github.com/CoderParkgg/CloneTube#readme",
-  "dependencies": {
-    "@ffmpeg/core": "^0.8.5",
-    "@ffmpeg/ffmpeg": "^0.9.7",
-    "bcrypt": "^5.0.1",
-    "connect-mongo": "^4.5.0",
-    "dotenv": "^10.0.0",
-    "express": "^4.17.1",
-    "express-flash": "0.0.2",
-    "express-session": "^1.17.2",
-    "mongoose": "^5.13.4",
-    "morgan": "^1.10.0",
-    "multer": "^1.4.3",
-    "node-fetch": "^2.6.1",
-    "pug": "^3.0.2",
-    "regenerator-runtime": "^0.13.9"
-
-  },
-  "devDependencies": {
-    "@babel/core": "^7.14.6",
-    "@babel/node": "^7.14.7",
-    "@babel/preset-env": "^7.14.7",
-    "babel-loader": "^8.2.2",
-    "css-loader": "^6.4.0",
-    "mini-css-extract-plugin": "^2.4.2",
-    "nodemon": "^2.0.12",
-    "prettier": "2.4.1",
-    "sass": "^1.42.1",
-    "sass-loader": "^12.2.0",
-    "style-loader": "^3.3.0",
-    "webpack": "^5.58.1",
-    "webpack-cli": "^4.9.0"
-  }
+    "name": "clonetube",
+    "version": "1.0.0",
+    "description": "The bet way to watch videos",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/CoderParkgg/CloneTube.git"
+    },
+    "scripts": {
+        "start": "node build/init.js",
+        "build": "npm run build:server && npm run build:assets",
+        "build:server": "babel src -d build",
+        "build:assets": "webpack --mode=production",
+        "dev:server": "nodemon",
+        "dev:assets": "webpack --mode=development -w"
+    },
+    "author": "Corder Park",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/CoderParkgg/CloneTube/issues"
+    },
+    "homepage": "https://github.com/CoderParkgg/CloneTube#readme",
+    "dependencies": {
+        "@ffmpeg/core": "^0.8.5",
+        "@ffmpeg/ffmpeg": "^0.9.7",
+        "bcrypt": "^5.0.1",
+        "connect-mongo": "^4.5.0",
+        "dotenv": "^10.0.0",
+        "express": "^4.17.1",
+        "express-flash": "0.0.2",
+        "express-session": "^1.17.2",
+        "mongoose": "^5.13.4",
+        "morgan": "^1.10.0",
+        "multer": "^1.4.3",
+        "node-fetch": "^2.6.1",
+        "pug": "^3.0.2",
+        "regenerator-runtime": "^0.13.9"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.16.0",
+        "@babel/core": "^7.16.0",
+        "@babel/node": "^7.14.7",
+        "@babel/preset-env": "^7.14.7",
+        "babel-loader": "^8.2.2",
+        "css-loader": "^6.4.0",
+        "mini-css-extract-plugin": "^2.4.2",
+        "nodemon": "^2.0.12",
+        "prettier": "2.4.1",
+        "sass": "^1.42.1",
+        "sass-loader": "^12.2.0",
+        "style-loader": "^3.3.0",
+        "webpack": "^5.58.1",
+        "webpack-cli": "^4.9.0"
+    }
 }

@@ -17,6 +17,7 @@ export const watch = async (req, res) => {
     if (!video) {
         return res.render("404", { pageTitle: "Video not found." });
     }
+    console.log(video);
     return res.render("watch", { pageTitle: video.title, video });
 };
 
@@ -150,8 +151,40 @@ export const createComment = async (req, res) => {
         owner: user._id,
         video: video._id,
     });
-    video.comments.push(comment._id); //video는 데이터베이스에서 id로 찾아 가져온 것. 이 객체의 comments는 배열형이었던 것을 기억할 것이다. push()함수를 사용하여 댓글의 id를 저장하자.
+    // video.comments.
+
+    video.comments.push(comment._id);
     video.save(); //video는 값을 가져와 상수에 넣은 것이다. 즉 이 상수의 값을 바꾼다고 해서 데이터베이스의 값이 변하는 것이 아니다. 그러므로 이것을 데이터베이스에 저장시켜 데이터베이스의 값을 업데이트 시켜야 한다.
 
     return res.sendStatus(201);
+};
+
+export const deleteComment = async (req, res) => {
+    let videoCommentIndex;
+    const videoId = req.params.id;
+    const commentId = req.body.id;
+    const comment = await Comment.findById(commentId);
+    const video = await Video.findById(videoId);
+    if (!comment) {
+        // console.log("comment not found");
+        return res.sendStatus(404);
+    }
+    if (!video) {
+        // console.log("video not found");
+        return res.sendStatus(404);
+    }
+    await Comment.findByIdAndDelete(commentId);
+    // console.log(Array.isArray(video.comments));
+    videoCommentIndex = video.comments.indexOf(commentId);
+    if (videoCommentIndex === -1) {
+        // console.log("video Index nt found");
+        return res.sendStatus(404);
+    }
+    // console.log(videoCommentIndex);
+    // console.log(video.comments[videoCommentIndex]);
+    video.comments = video.comments.splice(Number(videoCommentIndex), 1);
+    //console.log(video.comments);
+    //video.save();
+    console.log("saved");
+    return res.sendStatus(200);
 };

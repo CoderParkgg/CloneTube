@@ -1,4 +1,5 @@
 .video__data {
+    border-radius: 1px solid white;
     margin-top: 20px;
     display: flex;
     flex-direction: column;
@@ -17,6 +18,11 @@
             text-decoration: underline;
         }
     }
+    a {
+        margin-top: 15px;
+        color: cornflowerblue;
+        text-decoration: underline;
+    }
 }
 .video__comments {
     display: flex;
@@ -26,6 +32,8 @@
     margin: 0 auto;
     margin-top: 20px;
     .video__comment {
+        display: flex;
+        justify-content: space-between;
         padding: 10px;
         border-radius: 9999px;
         background-color: white;

@@ -1,34 +1,53 @@
 const videoContainer = document.getElementById("videoContainer");
 const form = document.getElementById("commentForm");
+const commentList = document.querySelectorAll(".video__comment");
+const commentDeleteBtn = document.querySelectorAll(".video__comment-delete");
+
+const videoId = videoContainer.dataset.id;
+let index = 0;
+
+// function
+const deleteComment = async (event) => {
+    await location.reload();
+    event.target.parentNode.remove();
+    await fetch(`/api/comment/${videoId}`, {
+        method: "delete",
+        headers: {
+            "content-type": "application/json",
+        },
+        body: JSON.stringify({ id: event.target.dataset.commentid }),
+    });
+};
 
 const addComment = (text) => {
-    const videoComments = document.querySelector(".video__comments ul"); //video__comments를 받아오고 그 안의 ul태그를 가져온다.
+    const videoComments = document.querySelector(".video__comments ul");
     const newComment = document.createElement("li");
     newComment.className = "video__comment";
     const icon = document.createElement("i");
+    const newDeleteBtn = document.createElement("i");
     icon.className = "fa fa-comment";
+    newDeleteBtn.innerText = "❌";
     const span = document.createElement("span");
     span.innerText = ` ${text}`;
     newComment.appendChild(icon);
     newComment.appendChild(span);
+    newComment.appendChild(newDeleteBtn);
     videoComments.prepend(newComment);
+
+    newDeleteBtn.addEventListener("click", deleteComment);
 };
 
+// callback
 const handleSubmit = async (event) => {
     //돔을 만드는 것 역시 null에서 요소를 돔으로 만드는 것이 안됨. 이를 방지하기 위해
     const textArea = form.querySelector("textarea");
-    //const btn = form.querySelector("button");
-
     event.preventDefault();
     const text = textArea.value;
-    const videoId = videoContainer.dataset.id;
     if (text === "") {
         //아무런 입력이 없으면 아무런 행동도 하지 않도록
         return;
     }
 
-    //fetch는 인자로 받은 주소로 요청한다. 이것이 만약 프론트에서 서버로의 요청이 되면 request의 일종이 되는 것이다.
-    //또한 fetch에는 요청에 내용(정보)을 담을 수 있다. 이전에 html에서 form으로 부터 body를 받을 수 있었는데 여기서 직접 이 객체를 request에 넣어 만들어 보자.
     const { status } = await fetch(`/api/videos/${videoId}/comment`, {
         method: "POST",
         //header는 기본적으로 request의 정보를 담고 있다.
@@ -44,7 +63,23 @@ const handleSubmit = async (event) => {
     }
 };
 
+const handleDelete = async (event) => {
+    location.reload();
+    const { status } = await fetch(`/api/comment/${videoId}`, {
+        method: "delete",
+        headers: {
+            "content-type": "application/json",
+        },
+        body: JSON.stringify({ id: event.target.dataset.commentid }),
+    });
+    location.reload();
+};
+
+// event listener
 if (form) {
-    //로그인 했을 때만 태그를 보여주니 로그인 하지 않은 경우 존재하지 않은 태그를 가져와 addEventListener를 사용하는 것이니까 에러뜸. 이를 방지하기 위해
     form.addEventListener("submit", handleSubmit);
+}
+
+for (let i = 0; i < commentDeleteBtn.length; i++) {
+    commentDeleteBtn[i].addEventListener("click", handleDelete);
 }
