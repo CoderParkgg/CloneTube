@@ -21,6 +21,7 @@ const s3VideoUploader = multerS3({
     s3: s3,
     bucket: "clonetubee/Vidoe",
     acl: "public-read",
+    contentType: multerS3.AUTO_CONTENT_TYPE,
 });
 
 //multer middleware
