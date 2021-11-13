@@ -6,8 +6,8 @@ import aws from "aws-sdk";
 // multer
 const s3 = new aws.S3({
     credentials: {
-        accessKeyId: process.env.AWS_ID, //s3를 생성자로 만들어 준다. 옵션으로 credentials을 줘서 만들어 준다.
-        secretAccessKey: process.env.AWS_SECRET, //주의할 점은 이렇게 만들어준 변수가 heroku에 들어있어야 한다.
+        accessKeyId: process.env.AWS_ID,
+        secretAccessKey: process.env.AWS_SECRET,
     },
 });
 
