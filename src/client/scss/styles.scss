@@ -67,3 +67,10 @@ main {
         color: white;
     }
 }
+
+.video-mixin__thumb {
+    img {
+        background-size: cover;
+        background-position: center;
+    }
+}
